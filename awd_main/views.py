@@ -6,11 +6,12 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 
+
 def home(request):
-    return render (request,'home.html')
+    return render(request,'home.html')
 
 def celery_test(request):
-    #just executing a time consuming task
+#    just executing a time consuming task
     celery_test_task.delay()
     return HttpResponse('<h3>Function executed successfully</h3>')
 
@@ -19,7 +20,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,'Registration successful')
+            messages.success(request, 'Registration successful')
             return redirect('register')
         else:
             context = {
@@ -31,7 +32,7 @@ def register(request):
         context = {
             'form': form,
         }
-    return render(request, 'register.html',context)
+    return render(request, 'register.html', context)
 
 def login(request):
     if request.method == 'POST':
@@ -51,7 +52,7 @@ def login(request):
     else:
         form = AuthenticationForm()
         context = {
-            'form' : form,
+            'form': form,
         }
     return render(request, 'login.html', context)
 

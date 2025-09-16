@@ -3,6 +3,7 @@
 {%block content%}
 
 <div class="container" style="padding: 50px;">
+    {% if user.is_authenticated %}
     <h2 class="text-center">Automate The Boring Stuff With Django</h2>
     <div class="row pt-5">
         <!-- Import data -->
@@ -34,7 +35,7 @@
 
         <!-- Bulk Emails -->
         <div class="col-md-4">
-            <a href="#" class="text-decoration-none text-dark">
+            <a href="{%url 'send_email' %}" class="text-decoration-none text-dark">
                 <div class="card alert-danger shadow">
                     <div class="card-header">
                     <h4>Bulk Emails</h4>
@@ -90,6 +91,20 @@
             </a>
         </div>
     </div>
+    
+    {%else %}
+
+    <div class="home-info">
+        <h2 class="text-center">Automate the Boring stuff with Django</h2>
+        <p class="lead text-center text-muted">
+            Automating the stuff using Django and also learning it too.
+        </p>
+        <div style="display: flex; justify-content: center;">
+            <a href="{% url 'login'%}" class="btn btn-primary">LOGIN</a>
+            &nbsp;<a href="{% url 'login'%}" class="btn btn-success">REGISTER</a>
+        </div>
+    </div>
+   {% endif %}
 </div>
 
 {%endblock%}
